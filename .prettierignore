@@ -1,0 +1,12 @@
+# Ignore artifacts
+dist
+build
+node_modules
+coverage
+package-lock.json
+yarn-lock
+pnpm-lock.yaml
+.vite
+.cache
+*.tsbuildinfo
+*.log
