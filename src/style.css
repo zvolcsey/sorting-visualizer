@@ -15,10 +15,54 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: grid;
+  grid-template-areas: 'header' 'main' 'footer';
+  grid-template-rows: auto 1fr auto;
   min-width: 320px;
   min-height: 100vh;
+}
+
+header {
+  grid-area: 'header';
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  grid-area: 'main';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+footer {
+  grid-area: 'footer';
+  text-align: center;
+}
+.array-container {
+  display: flex;
+}
+
+.array-bar {
+  background-color: #006eff;
+  width: 2px;
+  margin: 0 2px 0 0;
+}
+
+.array-bar:last-of-type {
+  margin-right: 0;
+}
+
+@media (min-width: 769px) {
+  header {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
