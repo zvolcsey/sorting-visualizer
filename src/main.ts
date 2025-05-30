@@ -1,4 +1,5 @@
-import { mergeSort } from './algorithms/mergeSort'
+import { mergeSortWithSortSteps } from './algorithms'
+import { mergeSortAnimation } from './animations/mergeSortAnimation'
 import { renderArray, resetArray } from './utils/utils'
 
 const generateArrayButton: HTMLButtonElement | null =
@@ -24,15 +25,22 @@ generateArrayButton?.addEventListener('click', () => {
 })
 
 // Sort the array using merge sort when the "Merge Sort" button is clicked
-// Now: Compare the result with the built-in JS sort
-// Future: Render the sorting process on the screen
 mergeSortButton?.addEventListener('click', () => {
-  const mergeSortedArray = mergeSort([...array])
+  // Sort the array using merge sort
+  const { sortedArray: mergeSortedArray, sortSteps } = mergeSortWithSortSteps([
+    ...array,
+  ])
+  // Sort the array using the built-in JavaScript sort function
   const builtInSortedArray = array.sort((a, b) => a - b)
+  // Compare the results of merge sort and the built-in sort
   console.log(
     'Merge Sort result is equal to JS built-in sort: ' +
       (mergeSortedArray.toString() === builtInSortedArray.toString())
   )
+  // Log the sorted arrays to the console
   console.log('Merge Sort result:', mergeSortedArray)
   console.log('JS built-in sort result:', builtInSortedArray)
+
+  // Run the merge sort animation and render the sorted array to the DOM
+  mergeSortAnimation(sortSteps, 10)
 })
