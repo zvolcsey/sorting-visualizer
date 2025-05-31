@@ -3,17 +3,25 @@ export interface ICompareStep {
   indices: [number, number]
 }
 
+export interface ISwapStep {
+  type: 'swap'
+  indices: [number, number]
+}
+
 export interface IOverwriteStep {
   type: 'overwrite'
   index: number
   value: number
 }
 
-export type IMergeSortStepUnion = ICompareStep | IOverwriteStep
+export type SortStepWithSwapUnion = ICompareStep | ISwapStep
+export type SortStepWithOverwriteUnion = ICompareStep | IOverwriteStep
 
-export interface IMergeSortResult {
+export interface SortResult<
+  T extends SortStepWithSwapUnion | SortStepWithOverwriteUnion,
+> {
   sortedArray: number[]
-  sortSteps: IMergeSortStepUnion[]
+  sortSteps: T[]
 }
 
 export interface IHighlightStep {
@@ -26,7 +34,8 @@ export interface IResetStep {
   indices: [number, number]
 }
 
-export type IMergeSortAnimationStepUnion =
+export type SortAnimationStepUnion =
   | IHighlightStep
   | IResetStep
+  | ISwapStep
   | IOverwriteStep

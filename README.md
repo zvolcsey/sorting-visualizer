@@ -28,10 +28,10 @@ His videos helped spark the idea and provided a great reference:
 - [Sorting Visualizer Tutorial](https://www.youtube.com/watch?v=pFXYym4Wbkc)
 - [The Projects That Got Me Into Google](https://www.youtube.com/watch?v=n4t_-NjY_Sg)
 
-The core merge sort algorithm is based on lessons from AlgoExpert
-(instructed by Clément Mihailescu), implemented from scratch in TypeScript, and compared with the merge sort in the Sorting Visualizer Tutorial. The animation logic -- including the structure of animation steps and playback -- is also inspired by the Sorting Visualizer Tutorial.
+The core bubble and merge sort algorithms are based on lessons from AlgoExpert
+(instructed by Clément Mihailescu). They are implemented from scratch in TypeScript. Merge sort is compared with the merge sort in the Sorting Visualizer Tutorial. The animation logic -- including the structure of animation steps and playback -- is also inspired by the Sorting Visualizer Tutorial.
 
-I previously learned merge sort logic in CS50x.
+I previously learned bubble and merge sort logic in CS50x.
 
 Some basic utility functions (like random number generation) follow common implementation found in public documentation (e.g. MDN).
 

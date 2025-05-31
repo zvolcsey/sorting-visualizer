@@ -56,6 +56,12 @@ footer {
   margin-right: 0;
 }
 
+button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 @media (min-width: 769px) {
   header {
     flex-direction: row;

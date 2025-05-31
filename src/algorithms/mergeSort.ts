@@ -4,23 +4,27 @@
   Written from scratch in TypeScript.
   Core idea: write the one auxiliary array version of the merge sort algorithm 
   and record compare and overwrite steps for visualization
+  This version has been customized to use a different step structure.
 */
 
-import type { IMergeSortStepUnion, IMergeSortResult } from '../types/types'
+import type { SortStepWithOverwriteUnion, SortResult } from '../types/types'
 
 /**
- * Merge Sort Algorithm
+ * Merge Sort Algorithm with Sort Steps
  *
  * This function sorts an array of numbers
  * using the one auxiliary array version of the merge sort algorithm.
- * It has O(n log n) time complexity and O(n) space complexity.
+ * It has O(n log n) time complexity and O(n log n) space complexity.
+ * Space complexity is O(n) if we ignore the space used for the sort steps.
  *
- * @param array - The array to be sorted
+ * @param {number[]} array - The array to be sorted
  * @returns An object containing the sorted array and an array of sort steps
- * @returns { sortedArray: number[], sortSteps: ISortSteps[] }
+ * @returns { sortedArray: number[], sortSteps: SortStepWithOverwriteUnion[] }
  */
-export function mergeSortWithSortSteps(array: number[]): IMergeSortResult {
-  const sortSteps: IMergeSortStepUnion[] = []
+export function mergeSortWithSortSteps(
+  array: number[]
+): SortResult<SortStepWithOverwriteUnion> {
+  const sortSteps: SortStepWithOverwriteUnion[] = []
   const arrayLength = array.length
   // Base case: if the array has 0 or 1 elements, it is already sorted.
   if (arrayLength <= 1) return { sortedArray: array, sortSteps }
@@ -48,7 +52,7 @@ function mergeSortHelper(
   startIndex: number,
   endIndex: number,
   auxiliaryArray: number[],
-  sortSteps: IMergeSortStepUnion[]
+  sortSteps: SortStepWithOverwriteUnion[]
 ) {
   // Base case: it is only one element in the range, it is already sorted
   if (startIndex === endIndex) return
@@ -91,7 +95,7 @@ function doMerge(
   middleIndex: number,
   endIndex: number,
   auxiliaryArray: number[],
-  sortSteps: IMergeSortStepUnion[]
+  sortSteps: SortStepWithOverwriteUnion[]
 ) {
   let k = startIndex
   let i = startIndex

@@ -1,9 +1,11 @@
-import { mergeSortWithSortSteps } from './algorithms'
-import { mergeSortAnimation } from './animations/mergeSortAnimation'
-import { renderArray, resetArray } from './utils/utils'
+import { bubbleSortWithSortSteps, mergeSortWithSortSteps } from './algorithms'
+import { sortAnimation } from './animations/sortAnimation'
+import { renderArray, resetArray, runSortFlow } from './utils/utils'
 
 const generateArrayButton: HTMLButtonElement | null =
   document.querySelector('#generate-array')
+const bubbleSortButton: HTMLButtonElement | null =
+  document.querySelector('#bubble-sort')
 const mergeSortButton: HTMLButtonElement | null =
   document.querySelector('#merge-sort')
 
@@ -24,23 +26,26 @@ generateArrayButton?.addEventListener('click', () => {
   renderArray(array)
 })
 
-// Sort the array using merge sort when the "Merge Sort" button is clicked
-mergeSortButton?.addEventListener('click', () => {
-  // Sort the array using merge sort
-  const { sortedArray: mergeSortedArray, sortSteps } = mergeSortWithSortSteps([
-    ...array,
-  ])
-  // Sort the array using the built-in JavaScript sort function
-  const builtInSortedArray = array.sort((a, b) => a - b)
-  // Compare the results of merge sort and the built-in sort
-  console.log(
-    'Merge Sort result is equal to JS built-in sort: ' +
-      (mergeSortedArray.toString() === builtInSortedArray.toString())
+// Sort the array using bubble sort when the "Bubble Sort" button is clicked
+bubbleSortButton?.addEventListener('click', async () => {
+  array = await runSortFlow(
+    [generateArrayButton, bubbleSortButton, mergeSortButton],
+    'Bubble Sort',
+    bubbleSortWithSortSteps,
+    array,
+    sortAnimation,
+    10
   )
-  // Log the sorted arrays to the console
-  console.log('Merge Sort result:', mergeSortedArray)
-  console.log('JS built-in sort result:', builtInSortedArray)
+})
 
-  // Run the merge sort animation and render the sorted array to the DOM
-  mergeSortAnimation(sortSteps, 10)
+// Sort the array using merge sort when the "Merge Sort" button is clicked
+mergeSortButton?.addEventListener('click', async () => {
+  array = await runSortFlow(
+    [generateArrayButton, bubbleSortButton, mergeSortButton],
+    'Merge Sort',
+    mergeSortWithSortSteps,
+    array,
+    sortAnimation,
+    10
+  )
 })

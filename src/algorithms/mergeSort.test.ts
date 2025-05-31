@@ -1,21 +1,23 @@
-import { getRandomIntInclusive } from '../utils/utils'
 import { mergeSortWithSortSteps } from './mergeSort'
+import { fuzzTest } from './testUtils'
 
 describe('mergeSort', () => {
   it('sorts 100 random arrays of numbers correctly', () => {
-    for (let i = 0; i < 100; i++) {
-      const array = new Array(getRandomIntInclusive(0, 1000))
-        .fill(0)
-        .map(() => getRandomIntInclusive(-1000, 1000))
-
-      const javaScriptSortedArray = [...array].sort((a, b) => a - b)
-      const { sortedArray: mergeSortedArray } = mergeSortWithSortSteps(array)
-      expect(mergeSortedArray).toEqual(javaScriptSortedArray)
-    }
-  }),
-    it('sorts all elements equal case correctly', () => {
-      const array = [1, 1, 1, 1, 1]
-      const { sortedArray: mergeSortedArray } = mergeSortWithSortSteps(array)
-      expect(mergeSortedArray.toString()).toEqual(array.toString())
-    })
+    fuzzTest(mergeSortWithSortSteps, 100, 1000)
+  })
+  it('sorts all elements equal case correctly', () => {
+    const array = [1, 1, 1, 1, 1]
+    const { sortedArray: mergeSortedArray } = mergeSortWithSortSteps(array)
+    expect(mergeSortedArray.toString()).toEqual(array.toString())
+  })
+  it('sorts already sorted array correctly', () => {
+    const array = [1, 2, 3, 4, 5]
+    const { sortedArray: mergeSortedArray } = mergeSortWithSortSteps(array)
+    expect(mergeSortedArray.toString()).toEqual(array.toString())
+  })
+  it('sorts reversed sorted array correctly', () => {
+    const array = [5, 4, 3, 2, 1]
+    const { sortedArray: mergeSortedArray } = mergeSortWithSortSteps(array)
+    expect(mergeSortedArray.toString()).toEqual([1, 2, 3, 4, 5].toString())
+  })
 })
