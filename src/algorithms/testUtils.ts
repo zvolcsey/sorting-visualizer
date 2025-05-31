@@ -5,7 +5,7 @@ import type {
 import { getRandomIntInclusive } from '../utils/utils'
 
 /**
- * Fuzzy test for sorting algorithms
+ * Fuzz test for sorting algorithms
  *
  * This function generates random arrays and
  * compares the provided sorting function's output
